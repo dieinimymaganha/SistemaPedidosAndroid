@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".web.CadastrarUsuario">
-
+    
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
