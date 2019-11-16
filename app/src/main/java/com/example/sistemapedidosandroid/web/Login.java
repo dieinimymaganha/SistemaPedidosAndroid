@@ -19,11 +19,20 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         cadastrar = findViewById(R.id.cadastrar);
+        login = findViewById(R.id.login);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Login.this, CadastrarUsuario.class);
+                startActivity(i);
+            }
+        });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =  new Intent(Login.this, Init.class);
                 startActivity(i);
             }
         });
