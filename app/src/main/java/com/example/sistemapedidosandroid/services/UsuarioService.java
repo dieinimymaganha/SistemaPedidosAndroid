@@ -9,5 +9,8 @@ import retrofit2.http.POST;
 public interface UsuarioService {
 
     @POST("users")
-    Call<Void> cadastrar(@Body Usuario usuario);
+    Call<Void> cadastrar(@Body Usuario user);
+
+    @POST("sessions")
+    Call<Void> login(@Body Usuario user);
 }
