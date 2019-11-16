@@ -2,13 +2,28 @@ package com.example.sistemapedidosandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class Login extends AppCompatActivity {
+
+    Button login, cadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        cadastrar = findViewById(R.id.cadastrar);
+
+        cadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login.this, CadastrarUsuario.class);
+                startActivity(i);
+            }
+        });
     }
 }
