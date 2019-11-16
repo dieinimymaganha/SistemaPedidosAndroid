@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Usuario implements Serializable {
     private Long id;
-    private String usuario;
+    private String username;
     private String email;
-    private String senha;
+    private String password;
 
 
     public Long getId() {
@@ -17,12 +17,12 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -33,11 +33,11 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
