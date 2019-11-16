@@ -20,8 +20,8 @@
 
 
 
-        <activity android:name=".CadastrarUsuario"></activity>
-        <activity android:name=".Login">
+        <activity android:name=".web.CadastrarUsuario"></activity>
+        <activity android:name=".web.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
