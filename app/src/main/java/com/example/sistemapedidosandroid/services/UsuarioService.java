@@ -11,6 +11,4 @@ public interface UsuarioService {
     @POST("users")
     Call<Void> cadastrar(@Body Usuario user);
 
-    @POST("sessions")
-    Call<Void> login(@Body Usuario user);
 }

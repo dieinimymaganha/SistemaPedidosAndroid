@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +12,7 @@ import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.Usuario;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
 
+import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,20 +50,6 @@ public class Login extends AppCompatActivity {
 
                 user.setEmail(usuario.getText().toString());
                 user.setPassword(senha.getText().toString());
-
-                Call call = new RetrofitInicializador().getUsuarioService().login(user);
-
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onResponse(Call call, Response response) {
-                        Log.i("onResponse", "Requisição com sucesso");
-                    }
-
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-                        Log.e("onFailure","Requisão falhou");
-                    }
-                });
 
 
             }

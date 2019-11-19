@@ -8,13 +8,8 @@ public class Usuario implements Serializable {
     private String email;
     private String password;
 
-    public Usuario(){
+    public Usuario() {
 
-    }
-
-    public Usuario(String email, String password) {
-        this.email = email;
-        this.password = password;
     }
 
     public Long getId() {
@@ -48,4 +43,5 @@ public class Usuario implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
