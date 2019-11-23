@@ -50,8 +50,6 @@ public class Login extends AppCompatActivity {
 
                 user.setEmail(usuario.getText().toString());
                 user.setPassword(senha.getText().toString());
-
-
             }
         });
     }
