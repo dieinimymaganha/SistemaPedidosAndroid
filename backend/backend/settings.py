@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'pedidos',
     'produtos',
     'itensdopedido',
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
