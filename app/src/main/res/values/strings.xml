@@ -6,4 +6,5 @@
     <string name="Sobrenome">Sobrenome</string>
     <string name="Cancelar">Cancelar</string>
     <string name="Cadastrar_Cliente">Cadastrar Cliente</string>
+    <string name="CPF">CPF</string>
 </resources>
