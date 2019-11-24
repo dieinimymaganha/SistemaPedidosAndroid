@@ -1,6 +1,7 @@
 package com.example.sistemapedidosandroid.retrofit;
 
 import com.example.sistemapedidosandroid.services.ClienteService;
+import com.example.sistemapedidosandroid.services.ProdutoService;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -14,8 +15,12 @@ public class RetrofitInicializador {
                 .addConverterFactory(JacksonConverterFactory.create()).build();
     }
 
-    public ClienteService getClienteService(){
+    public ClienteService getClienteService() {
         return retrofit.create(ClienteService.class);
+    }
+
+    public ProdutoService getProdutoService() {
+        return retrofit.create(ProdutoService.class);
     }
 
 }

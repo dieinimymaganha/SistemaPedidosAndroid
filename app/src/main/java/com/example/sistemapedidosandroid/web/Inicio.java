@@ -12,7 +12,7 @@ import com.example.sistemapedidosandroid.R;
 
 public class Inicio extends AppCompatActivity {
 
-    Button btCliente;
+    Button btCliente, btProduto;
 
 
     @Override
@@ -21,11 +21,22 @@ public class Inicio extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
 
         btCliente = findViewById(R.id.clientes);
+        btProduto = findViewById(R.id.produtos);
+
+
 
         btCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Inicio.this, Cliente.class);
+                startActivity(i);
+            }
+        });
+
+        btProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Inicio.this, Produto.class);
                 startActivity(i);
             }
         });
