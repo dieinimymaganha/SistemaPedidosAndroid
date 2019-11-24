@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">SistemaPedidosAndroid</string>
+    <string name="app_name">Sistema de Pedidos</string>
     <string name="pesquisar">Pesquisar</string>
     <string name="Cadastrar">Cadastrar</string>
+    <string name="Nome">Nome</string>
+    <string name="Sobrenome">Sobrenome</string>
+    <string name="Cancelar">Cancelar</string>
+    <string name="Cadastrar_Cliente">Cadastrar Cliente</string>
 </resources>
