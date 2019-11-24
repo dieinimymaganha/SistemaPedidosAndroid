@@ -10,23 +10,13 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo_menor" />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/clientes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -36,6 +26,7 @@
 
 
         <Button
+            android:id="@+id/produtos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -44,6 +35,7 @@
             android:textColor="#FFF" />
 
         <Button
+            android:id="@+id/pedodps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -52,13 +44,16 @@
             android:textColor="#FFF" />
 
         <Button
+            android:id="@+id/itensdopedido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="#ce3939"
             android:text="Itens do Pedido"
             android:textColor="#FFF" />
+
         <Button
+            android:id="@+id/sair"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
