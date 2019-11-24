@@ -20,11 +20,13 @@ from rest_framework import routers
 from clientes.api.viewsets import ClienteViewSet
 from itensdopedido.api.viewsets import ItemDoPedidoViewSet
 from pedidos.api.viewsets import PedidoViewSet
+from produtos.api.viewsets import ProdutoViewSet
 
 router = routers.DefaultRouter()
 router.register(r'clientes', ClienteViewSet)
 router.register(r'itensdopedido', ItemDoPedidoViewSet)
 router.register(r'pedidos', PedidoViewSet)
+router.register(r'produtos', ProdutoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
