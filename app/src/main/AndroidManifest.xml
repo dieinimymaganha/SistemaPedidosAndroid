@@ -16,9 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".web.Init"></activity>
-        <activity android:name=".web.CadastrarUsuario" />
-        <activity android:name=".web.Login">
+        <activity android:name=".web.Inicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
