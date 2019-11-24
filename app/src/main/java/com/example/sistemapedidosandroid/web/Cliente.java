@@ -6,29 +6,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.sistemapedidosandroid.R;
 
-public class Inicio extends AppCompatActivity {
+public class Cliente extends AppCompatActivity {
 
-    Button btCliente;
-
+    Button btCadastrar, btPesquisar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inicio);
+        setContentView(R.layout.activity_cliente);
 
-        btCliente = findViewById(R.id.clientes);
+        btCadastrar = findViewById(R.id.cadastrar);
+        btPesquisar = findViewById(R.id.pesquisar);
 
-        btCliente.setOnClickListener(new View.OnClickListener() {
+        btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Inicio.this, Cliente.class);
+                Intent i = new Intent(Cliente.this, CadastrarCliente.class);
                 startActivity(i);
             }
         });
+
 
     }
 }
