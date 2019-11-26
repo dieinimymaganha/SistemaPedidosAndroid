@@ -8,7 +8,7 @@
     tools:context=".web.ListarCliente">
 
     <ListView
-        android:id="@+id/lst1"
+        android:id="@+id/lista_cliente"
         android:layout_width="422dp"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="82dp"
