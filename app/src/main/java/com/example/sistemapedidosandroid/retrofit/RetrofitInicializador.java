@@ -11,7 +11,7 @@ public class RetrofitInicializador {
     private final Retrofit retrofit;
 
     public RetrofitInicializador() {
-        retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.103:8000/")
+        retrofit = new Retrofit.Builder().baseUrl("http://192.168.25.133:8080/")
                 .addConverterFactory(JacksonConverterFactory.create()).build();
     }
 
