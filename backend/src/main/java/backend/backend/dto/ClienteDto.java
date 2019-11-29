@@ -1,7 +1,7 @@
 package backend.backend.dto;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 import backend.backend.model.Cliente;
 
 public class ClienteDto {
@@ -9,13 +9,13 @@ public class ClienteDto {
 	private Long id;
 	private String nome;
 	private String sobrenome;
-	private String cpg;
+	private String cpf;
 
-	public ClienteDto(Long id, String nome, String sobrenome, String cpg) {
-		this.id = id;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.cpg = cpg;
+	public ClienteDto(Cliente cliente) {
+		this.id = cliente.getId();
+		this.nome = cliente.getNome();
+		this.sobrenome = cliente.getSobrenome();
+		this.cpf = cliente.getCpf();
 	}
 
 	public Long getId() {
@@ -30,12 +30,12 @@ public class ClienteDto {
 		return sobrenome;
 	}
 
-	public String getCpg() {
-		return cpg;
+	public String getCpf() {
+		return cpf;
 	}
 
 	public static List<ClienteDto> converter(List<Cliente> clientes) {
-		return clientes.stream().map(ClienteDto:: new).collect(Collectors.toList());
+		return clientes.stream().map(ClienteDto :: new).collect(Collectors.toList());
 	}
 
 }
