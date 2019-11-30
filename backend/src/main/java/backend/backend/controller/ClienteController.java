@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import backend.backend.controller.notfound.ClienteNotFoundException;
 import backend.backend.dto.ClienteDto;
 import backend.backend.form.ClienteForm;
 import backend.backend.model.Cliente;
@@ -54,6 +56,12 @@ public class ClienteController {
 			return clienteRepository.save(newCliente);
 		});
 
+	}
+	
+	@DeleteMapping("/{id}")
+	ResponseEntity<?> deleteCliente(@PathVariable Long id){
+		clienteRepository.deleteById(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
