@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class ClienteModel implements Serializable {
 
-
+    @JsonProperty("id")
     private Long id;
     private String nome;
     private String sobrenome;

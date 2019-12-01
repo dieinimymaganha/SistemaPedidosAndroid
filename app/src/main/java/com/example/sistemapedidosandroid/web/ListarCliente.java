@@ -1,10 +1,15 @@
 package com.example.sistemapedidosandroid.web;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Adapter;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -26,8 +31,6 @@ public class ListarCliente extends AppCompatActivity {
     ListView lista_cliente;
 
 
-    ArrayList<String> titles = new ArrayList<String>();
-
     ArrayAdapter arrayAdapter;
 
 
@@ -38,7 +41,6 @@ public class ListarCliente extends AppCompatActivity {
 
         lista_cliente = findViewById(R.id.lista_cliente);
 
-
         Call<List<ClienteModel>> call = new RetrofitInicializador().getClienteService().lista();
 
         call.enqueue(new Callback<List<ClienteModel>>() {
@@ -46,17 +48,24 @@ public class ListarCliente extends AppCompatActivity {
             public void onResponse(Call<List<ClienteModel>> call, Response<List<ClienteModel>> response) {
                 List<ClienteModel> clientes = response.body();
 
+
+                arrayAdapter = new ArrayAdapter(getBaseContext(), support_simple_spinner_dropdown_item, clientes);
+
+                lista_cliente.setAdapter(arrayAdapter);
+
+//
                 String[] cli = new String[clientes.size()];
 
+
                 for (int i = 0; i < clientes.size();
-                i++){
-                    cli[i] = clientes.get(i).getNome() +  " " + clientes.get(i).getSobrenome();
+                     i++) {
+                    cli[i] = clientes.get(i).getNome() + " " + clientes.get(i).getSobrenome();
 
                 }
 
                 lista_cliente.setAdapter(new ArrayAdapter<String>(getApplicationContext(), support_simple_spinner_dropdown_item, cli));
 
-
+                registerForContextMenu(lista_cliente);
                 Log.i("OnResponse", response.message());
 
             }
@@ -67,9 +76,36 @@ public class ListarCliente extends AppCompatActivity {
             }
         });
 
+    }
 
-//        arrayAdapter = new ArrayAdapter();
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add("Remover");
+    }
 
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
+        Long c = clienteEscolhido.getId();
+        Call<Void> call = new RetrofitInicializador().getClienteService().deletar(c);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
 
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("onFailure", "Requisão falhou");
+            }
+        });
+
+        return super.onContextItemSelected(item);
     }
 }

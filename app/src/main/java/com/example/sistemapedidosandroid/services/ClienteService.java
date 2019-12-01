@@ -7,8 +7,10 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ClienteService {
 
@@ -18,4 +20,9 @@ public interface ClienteService {
 
     @GET("clientes/")
     Call <List<ClienteModel>> lista();
+
+    @DELETE("clientes/{id}")
+    default Call<Void> deletar(@Path("id") Long id) {
+        return null;
+    }
 }
