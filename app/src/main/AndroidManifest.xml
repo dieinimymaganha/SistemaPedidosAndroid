@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".web.ListarCliente"></activity>
+        <activity android:name=".web.Editar_cliente"></activity>
+        <activity android:name=".web.ListarCliente" />
         <activity android:name=".web.CadastrarProduto" />
         <activity android:name=".web.Produto" />
         <activity android:name=".web.CadastrarCliente" />

@@ -21,6 +21,9 @@ public interface ClienteService {
     @GET("clientes/")
     Call <List<ClienteModel>> lista();
 
+    @GET("clientes/{id}")
+    Call <ClienteModel> find_cliente(@Path("id") Long id);
+
     @DELETE("clientes/{id}")
     default Call<Void> deletar(@Path("id") Long id) {
         return null;

@@ -122,6 +122,27 @@ public class ListarCliente extends AppCompatActivity {
 
         }
 
+//        if(itemId == R.id.alterar){
+//            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//            ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
+//            Long c = clienteEscolhido.getId();
+//
+//            Call<ClienteModel> call = new RetrofitInicializador().getClienteService().find_cliente(c);
+//
+//            call.enqueue(new Callback<ClienteModel>() {
+//                @Override
+//                public void onResponse(Call<ClienteModel> call, Response<ClienteModel> response) {
+//
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ClienteModel> call, Throwable t) {
+//
+//                }
+//            });
+//
+//        }
+
 
         return super.onContextItemSelected(item);
     }
