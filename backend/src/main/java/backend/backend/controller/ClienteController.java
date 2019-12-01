@@ -2,8 +2,6 @@ package backend.backend.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,11 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import backend.backend.controller.notfound.ClienteNotFoundException;
-import backend.backend.dto.ClienteDto;
-import backend.backend.form.ClienteForm;
 import backend.backend.model.Cliente;
 import backend.backend.repository.ClienteRepository;
 

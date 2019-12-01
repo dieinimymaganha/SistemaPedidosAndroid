@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import backend.backend.controller.notfound.ProdutoNotFoundException;
-import backend.backend.model.Cliente;
 import backend.backend.model.Produto;
 import backend.backend.repository.ProdutoRepository;
 
