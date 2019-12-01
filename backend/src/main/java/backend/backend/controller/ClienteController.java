@@ -32,6 +32,11 @@ public class ClienteController {
 	Cliente one(@PathVariable Long id) {
 		return clienteRepository.findById(id).orElseThrow(() -> new ClienteNotFoundException(id));
 	}
+	
+	@GetMapping("/cpf/{cpf}")
+	public Cliente one(@PathVariable String cpf) {
+		return clienteRepository.findByCpf(cpf);
+	}
 
 	@PostMapping
 	Cliente newCliente(@RequestBody Cliente newCliente) {

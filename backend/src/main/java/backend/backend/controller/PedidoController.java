@@ -33,6 +33,12 @@ public class PedidoController {
 	Pedido one(@PathVariable Long id) {
 		return pedidoRepository.findById(id).orElseThrow(() -> new PedidoNotFoundException(id));
 	}
+	
+	@GetMapping("/clientes/{cliente_id}")
+	 List<Pedido> listar(@PathVariable Long cliente_id) {
+		return pedidoRepository.findByCliente_Id(cliente_id);
+	}
+	
 
 	@PostMapping
 	@RequestMapping(value = "", method = RequestMethod.POST)
