@@ -23,63 +23,39 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Nome" />
 
         <EditText
             android:id="@+id/nome"
-            android:layout_width="248dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="8dp"
             android:ems="10"
+            android:hint="@string/Nome"
             android:textAlignment="center" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Sobrenome" />
 
         <EditText
             android:id="@+id/sobrenome"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="8dp"
             android:ems="10"
+            android:hint="@string/Sobrenome"
             android:textAlignment="center" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/CPF" />
 
         <EditText
             android:id="@+id/cpf"
             android:inputType="number"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="8dp"
             android:ems="10"
+            android:hint="@string/CPF"
             android:textAlignment="center" />
-    </LinearLayout>
+
 
 
     <LinearLayout
