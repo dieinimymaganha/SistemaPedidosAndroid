@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.ClienteModel;
@@ -81,30 +82,46 @@ public class ListarCliente extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add("Remover");
+        getMenuInflater().inflate(R.menu.activity_lista_cliente_menu, menu);
+
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
-        Long c = clienteEscolhido.getId();
-        Call<Void> call = new RetrofitInicializador().getClienteService().deletar(c);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
 
-            }
+        int itemId = item.getItemId();
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.e("onFailure", "Requisão falhou");
-            }
-        });
+
+        if (itemId == R.id.excluir) {
+            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
+            Long c = clienteEscolhido.getId();
+            Call<Void> call = new RetrofitInicializador().getClienteService().deletar(c);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    int resposta = response.code();
+                    Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
+
+                    if (resposta == 500) {
+                        Toast.makeText(ListarCliente.this, "Cliente Possui pedido em aberto"
+                                , Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.e("onFailure", "Requisão falhou");
+                }
+            });
+
+        }
+
 
         return super.onContextItemSelected(item);
     }
