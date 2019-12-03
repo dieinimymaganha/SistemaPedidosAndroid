@@ -130,7 +130,6 @@ public class ListarCliente extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), Editar_cliente.class);
 
             i.putExtra("id", clienteEscolhido.getId());
-
             i.putExtra("nome", clienteEscolhido.getNome());
             i.putExtra("sobrenome", clienteEscolhido.getSobrenome());
             i.putExtra("cpf", clienteEscolhido.getCpf());

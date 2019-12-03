@@ -31,7 +31,7 @@ public interface ClienteService {
     }
 
 
-    @PUT("cliente/{id}")
-    Call<Void> alterar(@Path("id") @Body ClienteModel cliente);
+    @PUT("clientes/{id}")
+    Call<Void> alterar(@Path("id") Long id, @Body ClienteModel cliente);
 
 }
