@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ClienteService {
@@ -19,13 +20,18 @@ public interface ClienteService {
 
 
     @GET("clientes/")
-    Call <List<ClienteModel>> lista();
+    Call<List<ClienteModel>> lista();
 
     @GET("clientes/{id}")
-    Call <ClienteModel> find_cliente(@Path("id") Long id);
+    Call<ClienteModel> find_cliente(@Path("id") Long id);
 
     @DELETE("clientes/{id}")
     default Call<Void> deletar(@Path("id") Long id) {
         return null;
     }
+
+
+    @PUT("cliente/{id}")
+    Call<Void> alterar(@Path("id") @Body ClienteModel cliente);
+
 }

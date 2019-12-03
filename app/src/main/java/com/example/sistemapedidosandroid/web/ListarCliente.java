@@ -122,26 +122,22 @@ public class ListarCliente extends AppCompatActivity {
 
         }
 
-//        if(itemId == R.id.alterar){
-//            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-//            ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
-//            Long c = clienteEscolhido.getId();
-//
-//            Call<ClienteModel> call = new RetrofitInicializador().getClienteService().find_cliente(c);
-//
-//            call.enqueue(new Callback<ClienteModel>() {
-//                @Override
-//                public void onResponse(Call<ClienteModel> call, Response<ClienteModel> response) {
-//
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ClienteModel> call, Throwable t) {
-//
-//                }
-//            });
-//
-//        }
+        if(itemId == R.id.alterar){
+            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
+            Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
+
+            Intent i = new Intent(getApplicationContext(), Editar_cliente.class);
+
+            i.putExtra("id", clienteEscolhido.getId());
+
+            i.putExtra("nome", clienteEscolhido.getNome());
+            i.putExtra("sobrenome", clienteEscolhido.getSobrenome());
+            i.putExtra("cpf", clienteEscolhido.getCpf());
+            startActivity(i);
+
+
+        }
 
 
         return super.onContextItemSelected(item);

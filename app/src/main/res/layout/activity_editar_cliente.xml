@@ -22,6 +22,16 @@
 
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/idCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:hint="@string/id"/>
+
+
 
     <EditText
         android:id="@+id/nome"
@@ -29,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:hint="@string/Nome"/>
 
 
     <EditText
@@ -38,7 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:hint="@string/Sobrenome"/>
 
 
     <EditText
@@ -48,7 +60,8 @@
         android:layout_margin="8dp"
         android:ems="10"
         android:inputType="number"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:hint="@string/CPF"/>
 
 
     <LinearLayout
@@ -62,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/colorAccent"
-            android:text="Cadastrar"
+            android:text="@string/alterar"
             android:textColor="#fff" />
 
         <Button
