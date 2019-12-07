@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -175,4 +176,22 @@ public class ListarProdutos extends AppCompatActivity {
 
 
     }
+
+    //Cria o menu para enviar para o home
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_home_home) {
+            startActivity(new Intent(this, Inicio.class));
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    // fim do menu home
 }

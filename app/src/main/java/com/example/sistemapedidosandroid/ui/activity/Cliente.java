@@ -33,7 +33,7 @@ public class Cliente extends AppCompatActivity {
         btPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Cliente.this, ListarCliente.class);
+                Intent i = new Intent(Cliente.this, ListarCliente_old.class);
                 startActivity(i);
             }
         });

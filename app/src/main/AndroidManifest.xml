@@ -16,10 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.EditarProduto"></activity>
+        <activity android:name=".ui.activity.ListarCliente"></activity>
+        <activity android:name=".ui.activity.EditarProduto" />
         <activity android:name=".ui.activity.ListarProdutos" />
         <activity android:name=".ui.activity.Editar_cliente" />
-        <activity android:name=".ui.activity.ListarCliente" />
+        <activity android:name=".ui.activity.ListarCliente_old" />
         <activity android:name=".ui.activity.CadastrarProduto" />
         <activity android:name=".ui.activity.CadastrarCliente" />
         <activity android:name=".ui.activity.Cliente" />

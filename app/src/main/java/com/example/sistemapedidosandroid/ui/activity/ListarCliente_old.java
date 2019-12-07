@@ -1,8 +1,5 @@
 package com.example.sistemapedidosandroid.ui.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,10 +12,12 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.ClienteModel;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ import retrofit2.Response;
 
 import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_dropdown_item;
 
-public class ListarCliente extends AppCompatActivity {
+public class ListarCliente_old extends AppCompatActivity {
 
 
     public static final String TITULO_APPBAR = "Lista de Clientes";
@@ -39,33 +38,18 @@ public class ListarCliente extends AppCompatActivity {
 
     ArrayAdapter arrayAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_cliente);
-
+        setContentView(R.layout.activity_listar_cliente_old);
         setTitle(TITULO_APPBAR);
         inicializacaoDosCampos();
-        configuraFabNovoCliente();
 
-    }
-
-    public void configuraFabNovoCliente(){
-        FloatingActionButton botaoNovoCliente = findViewById(R.id.activity_lista_clientes_fab_novo_cliente);
-        botaoNovoCliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abreCadastroCliente();
-            }
-        });
-    }
-
-    private void abreCadastroCliente() {
-        startActivity(new Intent(this, CadastrarCliente.class));
     }
 
     private void inicializacaoDosCampos() {
-        lista_cliente = findViewById(R.id.activity_lista_cliente);
+        lista_cliente = findViewById(R.id.lista_cliente);
     }
 
     @Override
@@ -116,7 +100,7 @@ public class ListarCliente extends AppCompatActivity {
 
         lista_cliente.setAdapter(arrayAdapter);
 
-        searchView = findViewById(R.id.activity_lista_clientes_searchView);
+        searchView = findViewById(R.id.searchView);
 
         registerForContextMenu(lista_cliente);
         Log.i("OnResponse", response.message());
@@ -169,7 +153,7 @@ public class ListarCliente extends AppCompatActivity {
                 Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
 
                 if (resposta == 500) {
-                    Toast.makeText(ListarCliente.this, "Cliente Possui pedido em aberto"
+                    Toast.makeText(ListarCliente_old.this, "Cliente Possui pedido em aberto"
                             , Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = getIntent();

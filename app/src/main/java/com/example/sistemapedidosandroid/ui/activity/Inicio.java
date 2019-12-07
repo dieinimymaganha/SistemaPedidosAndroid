@@ -27,7 +27,7 @@ public class Inicio extends AppCompatActivity {
         btCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Inicio.this, Cliente.class);
+                Intent i = new Intent(Inicio.this, ListarCliente.class);
                 startActivity(i);
             }
         });

@@ -96,7 +96,7 @@ public class Editar_cliente extends AppCompatActivity {
                             int resposta = response.code();
                             Log.i("onResponse", "Requisição com sucesso");
                             Toast.makeText(Editar_cliente.this, "Cliente " + cliente.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(Editar_cliente.this, ListarCliente.class);
+                            Intent i = new Intent(Editar_cliente.this, ListarCliente_old.class);
                             startActivity(i);
 
                         }
