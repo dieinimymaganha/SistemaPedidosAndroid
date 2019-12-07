@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class ClienteModel implements Serializable {
+public class Cliente implements Serializable {
 
     @JsonProperty("id")
     private Long id;

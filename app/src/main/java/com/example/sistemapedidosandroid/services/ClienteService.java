@@ -1,6 +1,6 @@
 package com.example.sistemapedidosandroid.services;
 
-import com.example.sistemapedidosandroid.modelo.ClienteModel;
+import com.example.sistemapedidosandroid.modelo.Cliente;
 
 import java.util.List;
 
@@ -15,14 +15,14 @@ import retrofit2.http.Path;
 public interface ClienteService {
 
     @POST("clientes/")
-    Call<Void> cadastrar(@Body ClienteModel cliente);
+    Call<Void> cadastrar(@Body Cliente cliente);
 
 
     @GET("clientes/")
-    Call<List<ClienteModel>> lista();
+    Call<List<Cliente>> lista();
 
     @GET("clientes/cpf/{nCpf}")
-    Call <ClienteModel> pesquisar_cpf(@Path("nCpf") String nCpf);
+    Call <Cliente> pesquisar_cpf(@Path("nCpf") String nCpf);
 
     @DELETE("clientes/{id}")
     default Call<Void> deletar(@Path("id") Long id) {
@@ -31,6 +31,6 @@ public interface ClienteService {
 
 
     @PUT("clientes/{id}")
-    Call<Void> alterar(@Path("id") Long id, @Body ClienteModel cliente);
+    Call<Void> alterar(@Path("id") Long id, @Body Cliente cliente);
 
 }

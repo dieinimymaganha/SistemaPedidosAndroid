@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +17,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.sistemapedidosandroid.R;
-import com.example.sistemapedidosandroid.modelo.ClienteModel;
+import com.example.sistemapedidosandroid.modelo.Cliente;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -50,7 +51,7 @@ public class ListarCliente extends AppCompatActivity {
 
     }
 
-    public void configuraFabNovoCliente(){
+    public void configuraFabNovoCliente() {
         FloatingActionButton botaoNovoCliente = findViewById(R.id.activity_lista_clientes_fab_novo_cliente);
         botaoNovoCliente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,17 +77,17 @@ public class ListarCliente extends AppCompatActivity {
     }
 
     private void carregaDadosClientes() {
-        Call<List<ClienteModel>> call = new RetrofitInicializador().getClienteService().lista();
+        Call<List<Cliente>> call = new RetrofitInicializador().getClienteService().lista();
 
-        call.enqueue(new Callback<List<ClienteModel>>() {
+        call.enqueue(new Callback<List<Cliente>>() {
             @Override
-            public void onResponse(Call<List<ClienteModel>> call, Response<List<ClienteModel>> response) {
+            public void onResponse(Call<List<Cliente>> call, Response<List<Cliente>> response) {
                 criaAdapterListView(response);
                 criaSearchView();
             }
 
             @Override
-            public void onFailure(Call<List<ClienteModel>> call, Throwable t) {
+            public void onFailure(Call<List<Cliente>> call, Throwable t) {
                 Log.e("OnResponse", t.getMessage());
             }
         });
@@ -109,8 +110,8 @@ public class ListarCliente extends AppCompatActivity {
         });
     }
 
-    private void criaAdapterListView(Response<List<ClienteModel>> response) {
-        List<ClienteModel> clientes = response.body();
+    private void criaAdapterListView(Response<List<Cliente>> response) {
+        List<Cliente> clientes = response.body();
 
         arrayAdapter = new ArrayAdapter(getBaseContext(), support_simple_spinner_dropdown_item, clientes);
 
@@ -147,7 +148,7 @@ public class ListarCliente extends AppCompatActivity {
 
     private void alterarCliente(@NonNull MenuItem item) {
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
+        Cliente clienteEscolhido = (Cliente) arrayAdapter.getItem(menuInfo.position);
         Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
         Intent i = new Intent(getApplicationContext(), Editar_cliente.class);
         i.putExtra("id", clienteEscolhido.getId());
@@ -159,7 +160,7 @@ public class ListarCliente extends AppCompatActivity {
 
     private void excluirCliente(@NonNull MenuItem item) {
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
+        Cliente clienteEscolhido = (Cliente) arrayAdapter.getItem(menuInfo.position);
         Long c = clienteEscolhido.getId();
         Call<Void> call = new RetrofitInicializador().getClienteService().deletar(c);
         call.enqueue(new Callback<Void>() {
@@ -172,9 +173,7 @@ public class ListarCliente extends AppCompatActivity {
                     Toast.makeText(ListarCliente.this, "Cliente Possui pedido em aberto"
                             , Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
+                    carregaDadosClientes();
                 }
 
             }
@@ -185,4 +184,23 @@ public class ListarCliente extends AppCompatActivity {
             }
         });
     }
+
+
+    //Cria o menu para enviar para o home
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_home_home) {
+            startActivity(new Intent(this, Inicio.class));
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    // fim do menu home
 }

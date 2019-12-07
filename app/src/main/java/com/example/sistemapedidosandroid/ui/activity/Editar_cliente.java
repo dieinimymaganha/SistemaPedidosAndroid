@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sistemapedidosandroid.R;
-import com.example.sistemapedidosandroid.modelo.ClienteModel;
+import com.example.sistemapedidosandroid.modelo.Cliente;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
@@ -70,7 +70,7 @@ public class Editar_cliente extends AppCompatActivity {
                 String sobrenome = edSobrenome.getText().toString();
                 String cpf = edCpf.getText().toString();
 
-                ClienteModel cliente = new ClienteModel();
+                Cliente cliente = new Cliente();
 
                 cliente.setNome(nome);
                 cliente.setSobrenome(sobrenome);

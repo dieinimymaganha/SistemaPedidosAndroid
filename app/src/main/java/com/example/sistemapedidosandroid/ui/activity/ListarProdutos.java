@@ -28,7 +28,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_dropdown_item;
-import static com.example.sistemapedidosandroid.ui.activity.ConstantesActivities.CHAVE_PRODUTO;
 import static com.example.sistemapedidosandroid.ui.activity.ConstantesActivities.DESCRICAO_PRODUTO;
 import static com.example.sistemapedidosandroid.ui.activity.ConstantesActivities.ID_PRODUTO;
 
@@ -131,7 +130,7 @@ public class ListarProdutos extends AppCompatActivity {
         int itemId = item.getItemId();
 
         if (itemId == R.id.activity_menu_lista_produto_remover) {
-            excluirCliente(item);
+            excluirProduto(item);
         }
 
         if (itemId == R.id.activity_menu_lista_produto_alterar) {
@@ -147,7 +146,7 @@ public class ListarProdutos extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 
-    private void excluirCliente(MenuItem item) {
+    private void excluirProduto(MenuItem item) {
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Produto produtoEscolhido = (Produto) arrayAdapter.getItem(menuInfo.position);
         Long p = produtoEscolhido.getId();
