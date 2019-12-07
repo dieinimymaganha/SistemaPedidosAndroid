@@ -2,19 +2,18 @@ package com.example.sistemapedidosandroid.modelo;
 
 import androidx.annotation.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
-public class Produto implements Serializable{
-    private Integer id;
+public class Produto implements Serializable {
+    @JsonProperty("id")
+    private Long id;
     private String descricao;
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getDescricao() {

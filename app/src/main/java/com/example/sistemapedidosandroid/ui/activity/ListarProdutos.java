@@ -1,17 +1,24 @@
 package com.example.sistemapedidosandroid.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.Produto;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -20,6 +27,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_dropdown_item;
+import static com.example.sistemapedidosandroid.ui.activity.ConstantesActivities.CHAVE_PRODUTO;
+import static com.example.sistemapedidosandroid.ui.activity.ConstantesActivities.DESCRICAO_PRODUTO;
+import static com.example.sistemapedidosandroid.ui.activity.ConstantesActivities.ID_PRODUTO;
 
 public class ListarProdutos extends AppCompatActivity {
 
@@ -34,6 +44,22 @@ public class ListarProdutos extends AppCompatActivity {
         setContentView(R.layout.activity_listar_produtos);
         setTitle(PRODUTOS);
         inicializacaoDosCampos();
+        configuraFabNovoPrduto();
+    }
+
+    private void configuraFabNovoPrduto() {
+
+        FloatingActionButton botaoNovoProduto = findViewById(R.id.activity_lista_produtos_fab_novo_produto);
+        botaoNovoProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abreCadastroProduto();
+            }
+        });
+    }
+
+    private void abreCadastroProduto() {
+        startActivity(new Intent(this, CadastrarProduto.class));
     }
 
     private void inicializacaoDosCampos() {
@@ -47,6 +73,7 @@ public class ListarProdutos extends AppCompatActivity {
 
         carregaDadosProdutos();
     }
+
 
     private void carregaDadosProdutos() {
 
@@ -96,5 +123,56 @@ public class ListarProdutos extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         getMenuInflater().inflate(R.menu.activity_lista_produtos_menu, menu);
         super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.activity_menu_lista_produto_remover) {
+            excluirCliente(item);
+        }
+
+        if (itemId == R.id.activity_menu_lista_produto_alterar) {
+            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            Produto produtoEscolhido = (Produto) arrayAdapter.getItem(menuInfo.position);
+            Log.i("cliente selecionado ", " id" + produtoEscolhido.getId());
+            Intent editarProduto = new Intent(getApplicationContext(), EditarProduto.class);
+            editarProduto.putExtra(ID_PRODUTO, produtoEscolhido.getId());
+            editarProduto.putExtra(DESCRICAO_PRODUTO, produtoEscolhido.getDescricao());
+            startActivity(editarProduto);
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    private void excluirCliente(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Produto produtoEscolhido = (Produto) arrayAdapter.getItem(menuInfo.position);
+        Long p = produtoEscolhido.getId();
+
+        Call<Void> call = new RetrofitInicializador().getProdutoService().deletar(p);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                int resposta = response.code();
+                if (resposta == 500) {
+                    Toast.makeText(ListarProdutos.this, "Falha ao Excluir", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    carregaDadosProdutos();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+
+
     }
 }

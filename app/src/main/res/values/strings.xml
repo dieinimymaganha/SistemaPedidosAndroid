@@ -14,4 +14,6 @@
     <string name="atualizar">Atualizar</string>
     <string name="alterar">Alterar</string>
     <string name="id">ID</string>
+    <string name="Salvar">Salvar</string>
+    <string name="Editar_Produto">Editar Produto</string>
 </resources>

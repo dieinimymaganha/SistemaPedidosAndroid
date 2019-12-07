@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.activity.CadastrarProduto">
+    tools:context=".ui.activity.EditarProduto">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,29 +15,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Cadastrar_Produto"
+            android:text="@string/Editar_Produto"
             android:textColor="@color/colorAccent"
             android:textSize="30sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Descrição" />
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/descricao"
-            android:layout_width="248dp"
+            android:id="@+id/actitivity_editar_produto_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:accessibilityHeading="false"
+            android:ems="10"
+            android:hint="@string/id"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/actitivity_editar_produto_descricao"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="@string/Descrição"
             android:textAlignment="center" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -46,23 +53,22 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/cadastrar"
+            android:id="@+id/actitivity_editar_produto_alterar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/colorAccent"
-            android:text="@string/Salvar"
+            android:text="@string/atualizar"
             android:textColor="#fff" />
 
         <Button
-            android:id="@+id/cancelar"
+            android:id="@+id/actitivity_editar_produto_cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/colorAccent"
-            android:text="Cancelar"
+            android:text="@string/Cancelar"
             android:textColor="#fff" />
 
     </LinearLayout>
-
 </LinearLayout>
