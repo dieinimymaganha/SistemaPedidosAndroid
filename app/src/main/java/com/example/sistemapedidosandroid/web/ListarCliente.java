@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.ClienteModel;
@@ -52,6 +53,9 @@ public class ListarCliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_cliente);
 
+         setTitle("Lista de Clientes");
+
+
         lista_cliente = findViewById(R.id.lista_cliente);
 
 
@@ -73,13 +77,14 @@ public class ListarCliente extends AppCompatActivity {
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String newText) {
-
-                        arrayAdapter.getFilter().filter(newText);
+                        
                         return false;
                     }
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
+
+                        arrayAdapter.getFilter().filter(newText);
                         return false;
                     }
                 });
