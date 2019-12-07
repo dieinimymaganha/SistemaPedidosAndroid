@@ -51,6 +51,7 @@ public class ListarCliente extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_listar_cliente);
 
         setTitle("Lista de Clientes");
@@ -70,32 +71,8 @@ public class ListarCliente extends AppCompatActivity {
         call.enqueue(new Callback<List<ClienteModel>>() {
             @Override
             public void onResponse(Call<List<ClienteModel>> call, Response<List<ClienteModel>> response) {
-                List<ClienteModel> clientes = response.body();
-
-                arrayAdapter = new ArrayAdapter(getBaseContext(), support_simple_spinner_dropdown_item, clientes);
-
-                lista_cliente.setAdapter(arrayAdapter);
-
-                searchView = findViewById(R.id.searchView);
-
-                registerForContextMenu(lista_cliente);
-                Log.i("OnResponse", response.message());
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String newText) {
-
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-
-                        arrayAdapter.getFilter().filter(newText);
-                        return false;
-                    }
-                });
-
-
+                criaAdapterListView(response);
+                criaSearchView();
             }
 
             @Override
@@ -103,6 +80,36 @@ public class ListarCliente extends AppCompatActivity {
                 Log.e("OnResponse", t.getMessage());
             }
         });
+    }
+
+    private void criaSearchView() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String newText) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                arrayAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+
+    private void criaAdapterListView(Response<List<ClienteModel>> response) {
+        List<ClienteModel> clientes = response.body();
+
+        arrayAdapter = new ArrayAdapter(getBaseContext(), support_simple_spinner_dropdown_item, clientes);
+
+        lista_cliente.setAdapter(arrayAdapter);
+
+        searchView = findViewById(R.id.searchView);
+
+        registerForContextMenu(lista_cliente);
+        Log.i("OnResponse", response.message());
     }
 
     @Override
