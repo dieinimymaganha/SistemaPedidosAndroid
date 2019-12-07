@@ -1,10 +1,13 @@
 package com.example.sistemapedidosandroid.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -112,4 +115,22 @@ public class Editar_cliente extends AppCompatActivity {
 
 
     }
+
+    //Cria o menu para enviar para o home
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_home_home) {
+            startActivity(new Intent(this, Inicio.class));
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    // fim do menu home
 }
