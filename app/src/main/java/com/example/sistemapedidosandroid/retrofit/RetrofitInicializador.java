@@ -13,7 +13,7 @@ public class RetrofitInicializador {
     private final Retrofit retrofit;
 
     public RetrofitInicializador() {
-        retrofit = new Retrofit.Builder().baseUrl("http://192.168.25.132:8080/")
+        retrofit = new Retrofit.Builder().baseUrl("http://192.168.25.133:8080/")
                 .addConverterFactory(JacksonConverterFactory.create()).build();
     }
 

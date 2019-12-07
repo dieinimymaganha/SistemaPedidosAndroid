@@ -1,7 +1,6 @@
 package com.example.sistemapedidosandroid.services;
 
 import com.example.sistemapedidosandroid.modelo.ClienteModel;
-import com.example.sistemapedidosandroid.web.Cliente;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.sistemapedidosandroid.web;
+package com.example.sistemapedidosandroid.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

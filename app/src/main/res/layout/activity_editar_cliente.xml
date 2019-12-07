@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".web.Editar_cliente">
+    tools:context=".ui.activity.Editar_cliente">
 
     <LinearLayout
         android:layout_width="wrap_content"

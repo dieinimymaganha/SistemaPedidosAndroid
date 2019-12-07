@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".web.Inicio">
+    tools:context=".ui.activity.Inicio">
 
 
     <LinearLayout

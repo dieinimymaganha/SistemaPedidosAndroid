@@ -1,4 +1,4 @@
-package com.example.sistemapedidosandroid.web;
+package com.example.sistemapedidosandroid.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,7 +33,7 @@ public class Cliente extends AppCompatActivity {
         btPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Cliente.this,ListarCliente.class);
+                Intent i = new Intent(Cliente.this, ListarCliente.class);
                 startActivity(i);
             }
         });
