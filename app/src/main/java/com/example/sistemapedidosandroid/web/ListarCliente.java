@@ -1,45 +1,36 @@
 package com.example.sistemapedidosandroid.web;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.R.layout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
-import android.view.SearchEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.ClienteModel;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
-import com.github.rtoshiro.util.format.SimpleMaskFormatter;
-import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.R.layout.simple_expandable_list_item_1;
-import static android.R.layout.simple_list_item_1;
 import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_dropdown_item;
 
 public class ListarCliente extends AppCompatActivity {
 
 
+    public static final String TITULO_APPBAR = "Lista de Clientes";
     SearchView searchView;
 
     ListView lista_cliente;
@@ -51,21 +42,24 @@ public class ListarCliente extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_listar_cliente);
+        setTitle(TITULO_APPBAR);
+        inicializacaoDosCampos();
 
-        setTitle("Lista de Clientes");
+    }
 
-
+    private void inicializacaoDosCampos() {
         lista_cliente = findViewById(R.id.lista_cliente);
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        carregaDadosClientes();
+    }
+
+    private void carregaDadosClientes() {
         Call<List<ClienteModel>> call = new RetrofitInicializador().getClienteService().lista();
 
         call.enqueue(new Callback<List<ClienteModel>>() {
@@ -126,52 +120,53 @@ public class ListarCliente extends AppCompatActivity {
 
 
         if (itemId == R.id.excluir) {
-            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-            ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
-            Long c = clienteEscolhido.getId();
-            Call<Void> call = new RetrofitInicializador().getClienteService().deletar(c);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    int resposta = response.code();
-                    Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
-
-                    if (resposta == 500) {
-                        Toast.makeText(ListarCliente.this, "Cliente Possui pedido em aberto"
-                                , Toast.LENGTH_SHORT).show();
-                    } else {
-                        Intent intent = getIntent();
-                        finish();
-                        startActivity(intent);
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Log.e("onFailure", "Requisão falhou");
-                }
-            });
-
+            excluirCliente(item);
         }
 
         if (itemId == R.id.alterar) {
-            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-            ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
-            Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
-
-            Intent i = new Intent(getApplicationContext(), Editar_cliente.class);
-
-            i.putExtra("id", clienteEscolhido.getId());
-            i.putExtra("nome", clienteEscolhido.getNome());
-            i.putExtra("sobrenome", clienteEscolhido.getSobrenome());
-            i.putExtra("cpf", clienteEscolhido.getCpf());
-            startActivity(i);
-
-
+            alterarCliente(item);
         }
-
-
         return super.onContextItemSelected(item);
+    }
+
+    private void alterarCliente(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
+        Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
+        Intent i = new Intent(getApplicationContext(), Editar_cliente.class);
+        i.putExtra("id", clienteEscolhido.getId());
+        i.putExtra("nome", clienteEscolhido.getNome());
+        i.putExtra("sobrenome", clienteEscolhido.getSobrenome());
+        i.putExtra("cpf", clienteEscolhido.getCpf());
+        startActivity(i);
+    }
+
+    private void excluirCliente(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
+        Long c = clienteEscolhido.getId();
+        Call<Void> call = new RetrofitInicializador().getClienteService().deletar(c);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                int resposta = response.code();
+                Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
+
+                if (resposta == 500) {
+                    Toast.makeText(ListarCliente.this, "Cliente Possui pedido em aberto"
+                            , Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("onFailure", "Requisão falhou");
+            }
+        });
     }
 }
