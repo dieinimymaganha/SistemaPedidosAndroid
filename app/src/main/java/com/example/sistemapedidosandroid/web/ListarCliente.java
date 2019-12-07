@@ -53,11 +53,17 @@ public class ListarCliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_cliente);
 
-         setTitle("Lista de Clientes");
+        setTitle("Lista de Clientes");
 
 
         lista_cliente = findViewById(R.id.lista_cliente);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         Call<List<ClienteModel>> call = new RetrofitInicializador().getClienteService().lista();
 
@@ -77,7 +83,7 @@ public class ListarCliente extends AppCompatActivity {
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String newText) {
-                        
+
                         return false;
                     }
 
@@ -97,9 +103,7 @@ public class ListarCliente extends AppCompatActivity {
                 Log.e("OnResponse", t.getMessage());
             }
         });
-
     }
-
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
