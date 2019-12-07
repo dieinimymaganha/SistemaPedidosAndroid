@@ -84,7 +84,7 @@ public class CadastrarCliente extends AppCompatActivity {
                             } else {
                                 Log.i("onResponse", "Requisição com sucesso");
                                 Toast.makeText(CadastrarCliente.this, "Cliente " + cliente.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(CadastrarCliente.this, ListarCliente_old.class);
+                                Intent i = new Intent(CadastrarCliente.this, ListarCliente.class);
                                 startActivity(i);
 
                             }
@@ -106,7 +106,7 @@ public class CadastrarCliente extends AppCompatActivity {
         btCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(CadastrarCliente.this, Cliente.class);
+                Intent i = new Intent(CadastrarCliente.this, ListarCliente.class);
                 startActivity(i);
             }
         });
