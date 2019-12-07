@@ -1,8 +1,10 @@
 package com.example.sistemapedidosandroid.modelo;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
-public class ProdutoModel implements Serializable{
+public class Produto implements Serializable{
     private Integer id;
     private String descricao;
 
@@ -21,5 +23,11 @@ public class ProdutoModel implements Serializable{
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return descricao;
     }
 }

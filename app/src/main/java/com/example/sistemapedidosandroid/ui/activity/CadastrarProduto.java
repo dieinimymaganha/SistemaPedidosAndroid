@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.sistemapedidosandroid.R;
-import com.example.sistemapedidosandroid.modelo.ProdutoModel;
+import com.example.sistemapedidosandroid.modelo.Produto;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
 
 import retrofit2.Call;
@@ -34,7 +34,7 @@ public class CadastrarProduto extends AppCompatActivity {
         btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProdutoModel produto = new ProdutoModel();
+                Produto produto = new Produto();
 
                 produto.setDescricao(edDescricao.getText().toString());
 

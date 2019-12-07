@@ -35,7 +35,7 @@ public class Inicio extends AppCompatActivity {
         btProduto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Inicio.this, Produto.class);
+                Intent i = new Intent(Inicio.this, ListarProdutos.class);
                 startActivity(i);
             }
         });
