@@ -1,5 +1,7 @@
 package com.example.sistemapedidosandroid.modelo;
 
+import androidx.annotation.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -43,5 +45,11 @@ public class ClienteModel implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return nome + " " + sobrenome;
     }
 }

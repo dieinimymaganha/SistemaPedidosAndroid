@@ -3,20 +3,27 @@ package com.example.sistemapedidosandroid.web;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.R.layout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
+import android.view.SearchEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.ClienteModel;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +32,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.R.layout.simple_expandable_list_item_1;
+import static android.R.layout.simple_list_item_1;
 import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_dropdown_item;
 
 public class ListarCliente extends AppCompatActivity {
+
+
+    SearchView searchView;
 
     ListView lista_cliente;
 
@@ -42,6 +54,7 @@ public class ListarCliente extends AppCompatActivity {
 
         lista_cliente = findViewById(R.id.lista_cliente);
 
+
         Call<List<ClienteModel>> call = new RetrofitInicializador().getClienteService().lista();
 
         call.enqueue(new Callback<List<ClienteModel>>() {
@@ -49,25 +62,28 @@ public class ListarCliente extends AppCompatActivity {
             public void onResponse(Call<List<ClienteModel>> call, Response<List<ClienteModel>> response) {
                 List<ClienteModel> clientes = response.body();
 
-
                 arrayAdapter = new ArrayAdapter(getBaseContext(), support_simple_spinner_dropdown_item, clientes);
 
                 lista_cliente.setAdapter(arrayAdapter);
 
-//
-                String[] cli = new String[clientes.size()];
-
-
-                for (int i = 0; i < clientes.size();
-                     i++) {
-                    cli[i] = clientes.get(i).getNome() + " " + clientes.get(i).getSobrenome();
-
-                }
-
-                lista_cliente.setAdapter(new ArrayAdapter<String>(getApplicationContext(), support_simple_spinner_dropdown_item, cli));
+                searchView = findViewById(R.id.searchView);
 
                 registerForContextMenu(lista_cliente);
                 Log.i("OnResponse", response.message());
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String newText) {
+
+                        arrayAdapter.getFilter().filter(newText);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+                });
+
 
             }
 
@@ -78,6 +94,7 @@ public class ListarCliente extends AppCompatActivity {
         });
 
     }
+
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -122,7 +139,7 @@ public class ListarCliente extends AppCompatActivity {
 
         }
 
-        if(itemId == R.id.alterar){
+        if (itemId == R.id.alterar) {
             AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             ClienteModel clienteEscolhido = (ClienteModel) arrayAdapter.getItem(menuInfo.position);
             Log.i("onResponse", "Requisição com sucesso " + clienteEscolhido.getId());
