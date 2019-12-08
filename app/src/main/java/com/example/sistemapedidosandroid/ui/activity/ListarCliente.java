@@ -148,7 +148,23 @@ public class ListarCliente extends AppCompatActivity {
             listaPedidosCliente(item);
         }
 
+        if(itemId == R.id.menu_cliente_incluir_pedido){
+            incluirPedido(item);
+        }
+
         return super.onContextItemSelected(item);
+    }
+
+    private void incluirPedido(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Cliente clienteEscolhido = (Cliente) arrayAdapter.getItem(menuInfo.position);
+        Intent i = new Intent(getApplicationContext(), CadastrarPedido.class);
+        i.putExtra("id", clienteEscolhido.getId());
+        i.putExtra("nome", clienteEscolhido.getNome());
+        i.putExtra("sobrenome", clienteEscolhido.getSobrenome());
+        i.putExtra("cpf", clienteEscolhido.getCpf());
+        startActivity(i);
+
     }
 
     private void listaPedidosCliente(MenuItem item) {

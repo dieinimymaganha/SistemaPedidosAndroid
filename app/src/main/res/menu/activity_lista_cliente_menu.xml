@@ -5,6 +5,11 @@
     <item
         android:id="@+id/menu_cliente_listar_pedidos"
         android:title="Listar Pedidos" />
+
+    <item
+        android:id="@+id/menu_cliente_incluir_pedido"
+        android:title="Incluir Pedido"/>
+
     <item
         android:id="@+id/alterar"
         android:title="Alterar" />
