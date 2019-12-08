@@ -23,6 +23,7 @@
         <activity android:name=".ui.activity.Editar_cliente" />
         <activity android:name=".ui.activity.CadastrarProduto" />
         <activity android:name=".ui.activity.CadastrarCliente" />
+        <activity android:name=".ui.activity.ListarPedidos" />
         <activity android:name=".ui.activity.Inicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

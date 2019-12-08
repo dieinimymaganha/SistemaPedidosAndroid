@@ -44,7 +44,7 @@ public class Inicio extends AppCompatActivity {
         btPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Inicio.this, ListarPedidosPorCliente.class));
+                startActivity(new Intent(Inicio.this, ListarPedidos.class));
             }
         });
 
