@@ -17,43 +17,54 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CadastrarProduto extends AppCompatActivity {
+    public static final String CADASTRAR_PRODUTO = "Cadastrar Produto";
     Button btCadastrar, btCancelar;
     EditText edDescricao;
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_produto);
-
-        edDescricao = findViewById(R.id.descricao);
-        btCadastrar = findViewById(R.id.cadastrar);
-
+        setTitle(CADASTRAR_PRODUTO);
+        inicializacaoDosCampos();
 
         btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Produto produto = new Produto();
-
-                produto.setDescricao(edDescricao.getText().toString());
-
-                Call call = new RetrofitInicializador().getProdutoService().cadastrar(produto);
-
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onResponse(Call call, Response response) {
-                        Log.i("onResponse", "Requisição com sucesso");
-                        finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-                        Log.e("onFailure","Requisão falhou");
-                    }
-                });
+                cadastraProduto();
 
             }
         });
+
+        btCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void cadastraProduto() {
+        Produto produto = new Produto();
+        produto.setDescricao(edDescricao.getText().toString());
+        Call call = new RetrofitInicializador().getProdutoService().cadastrar(produto);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.i("onResponse", "Requisição com sucesso");
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.e("onFailure","Requisão falhou");
+            }
+        });
+    }
+
+    private void inicializacaoDosCampos() {
+        edDescricao = findViewById(R.id.descricao);
+        btCadastrar = findViewById(R.id.cadastrar);
+        btCancelar = findViewById(R.id.cancelar);
     }
 }

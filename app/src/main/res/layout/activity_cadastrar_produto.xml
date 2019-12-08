@@ -7,38 +7,15 @@
     android:orientation="vertical"
     tools:context=".ui.activity.CadastrarProduto">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+
+    <EditText
+        android:id="@+id/descricao"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Cadastrar_Produto"
-            android:textColor="@color/colorAccent"
-            android:textSize="30sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Descrição" />
-
-        <EditText
-            android:id="@+id/descricao"
-            android:layout_width="248dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:textAlignment="center" />
-    </LinearLayout>
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:hint="@string/Descrição"
+        android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/colorAccent"
+            android:background="@color/botoes"
             android:text="@string/Salvar"
             android:textColor="#fff" />
 
@@ -59,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/colorAccent"
+            android:background="@color/botoes"
             android:text="Cancelar"
             android:textColor="#fff" />
 
