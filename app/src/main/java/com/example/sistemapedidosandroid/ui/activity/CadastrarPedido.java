@@ -43,43 +43,18 @@ public class CadastrarPedido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_pedido);
-
-
         spinner_produtos = findViewById(R.id.spinner_pedido);
-
-        btCadastrar = findViewById(R.id.acttivity_cadastrar_pedido_cadastrar);
-        txtCpf = findViewById(R.id.activity_cadastrar_pedido_cpf);
-        txtNome = findViewById(R.id.activity_cadastrar_pedido_nome);
+        inicializacaoDosCampos();
 
         Intent i = getIntent();
-
         id = i.getLongExtra("id", 0);
-
         String nome = i.getStringExtra("nome").toString();
         String sobrenome = i.getStringExtra("sobrenome").toString();
         String cpf = i.getStringExtra("cpf").toString();
-
         txtCpf.setText(cpf);
         txtNome.setText(nome + " " + sobrenome);
 
-
-        Call<List<Produto>> call = new RetrofitInicializador().getProdutoService().lista();
-
-        call.enqueue(new Callback<List<Produto>>() {
-            @Override
-            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
-
-                List<Produto> produtos = response.body();
-                arrayAdapterProduto = new ArrayAdapter(getBaseContext(), support_simple_spinner_dropdown_item, produtos);
-                spinner_produtos.setAdapter(arrayAdapterProduto);
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Produto>> call, Throwable t) {
-
-            }
-        });
+        carregaProdutos();
 
 
         btCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +88,31 @@ public class CadastrarPedido extends AppCompatActivity {
 
     }
 
+    private void carregaProdutos() {
+        Call<List<Produto>> call = new RetrofitInicializador().getProdutoService().lista();
 
+        call.enqueue(new Callback<List<Produto>>() {
+            @Override
+            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+
+                List<Produto> produtos = response.body();
+                arrayAdapterProduto = new ArrayAdapter(getBaseContext(), support_simple_spinner_dropdown_item, produtos);
+                spinner_produtos.setAdapter(arrayAdapterProduto);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Produto>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void inicializacaoDosCampos() {
+        btCadastrar = findViewById(R.id.acttivity_cadastrar_pedido_cadastrar);
+        txtCpf = findViewById(R.id.activity_cadastrar_pedido_cpf);
+        txtNome = findViewById(R.id.activity_cadastrar_pedido_nome);
+    }
 
 
 }
