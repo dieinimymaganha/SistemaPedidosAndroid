@@ -8,20 +8,6 @@
     android:orientation="vertical"
     tools:context=".ui.activity.Editar_cliente">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Cadastrar_Cliente"
-            android:textColor="@color/colorAccent"
-            android:textSize="30sp" />
-
-    </LinearLayout>
-
     <EditText
         android:accessibilityHeading="false"
         android:id="@+id/idCliente"
@@ -31,8 +17,6 @@
         android:ems="10"
         android:textAlignment="center"
         android:hint="@string/id"/>
-
-
 
     <EditText
         android:id="@+id/nome"
@@ -75,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/colorAccent"
+            android:background="@color/botoes"
             android:text="@string/alterar"
             android:textColor="#fff" />
 
@@ -84,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/colorAccent"
+            android:background="@color/botoes"
             android:text="Cancelar"
             android:textColor="#fff" />
 
