@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.ListarCliente"></activity>
+        <activity android:name=".ui.activity.ListarPedidos"></activity>
+        <activity android:name=".ui.activity.ListarCliente" />
         <activity android:name=".ui.activity.EditarProduto" />
         <activity android:name=".ui.activity.ListarProdutos" />
         <activity android:name=".ui.activity.Editar_cliente" />
