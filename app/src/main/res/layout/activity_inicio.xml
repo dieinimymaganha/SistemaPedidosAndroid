@@ -43,24 +43,6 @@
             android:text="Pedidos"
             android:textColor="#FFF" />
 
-        <Button
-            android:id="@+id/itensdopedido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/botoes"
-            android:text="Itens do Pedido"
-            android:textColor="#FFF" />
-
-        <Button
-            android:id="@+id/sair"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="#fff"
-            android:text="Sair"
-            android:textColor="#ce3939" />
-
 
     </LinearLayout>
 

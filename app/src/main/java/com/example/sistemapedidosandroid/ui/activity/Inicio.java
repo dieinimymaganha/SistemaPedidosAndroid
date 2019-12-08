@@ -11,7 +11,7 @@ import com.example.sistemapedidosandroid.R;
 
 public class Inicio extends AppCompatActivity {
 
-    Button btCliente, btProduto, btPedido, btCadastrarPedido;
+    Button btCliente, btProduto, btPedido;
 
 
     @Override
@@ -22,9 +22,6 @@ public class Inicio extends AppCompatActivity {
         btCliente = findViewById(R.id.clientes);
         btProduto = findViewById(R.id.produtos);
         btPedido = findViewById(R.id.activity_inicio_pedidos);
-
-        btCadastrarPedido = findViewById(R.id.itensdopedido);
-
 
         btCliente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,14 +45,5 @@ public class Inicio extends AppCompatActivity {
                 startActivity(new Intent(Inicio.this, ListarPedidos.class));
             }
         });
-
-        btCadastrarPedido.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Inicio.this, CadastrarPedido.class));
-            }
-        });
-
-
     }
 }
