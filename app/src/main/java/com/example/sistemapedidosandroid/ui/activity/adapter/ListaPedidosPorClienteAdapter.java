@@ -49,7 +49,7 @@ public class ListaPedidosPorClienteAdapter extends BaseAdapter {
 
         }
         TextView numeroPedido = view.findViewById(R.id.itens_pedido_cliente_id);
-        numeroPedido.setText("Numero do pedido: " + pedido);
+        numeroPedido.setText("Numero do pedido: " + pedido.getId());
         TextView produto = view.findViewById(R.id.itens_pedido_cliente_produto);
         produto.setText(pedido.getItempedido().toString());
 
