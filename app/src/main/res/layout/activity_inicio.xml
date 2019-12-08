@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="#ce3939"
+            android:background="@color/botoes"
             android:text="Clientes"
             android:textColor="#FFF" />
 
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="#ce3939"
+            android:background="@color/botoes"
             android:text="Produtos"
             android:textColor="#FFF" />
 
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="#ce3939"
+            android:background="@color/botoes"
             android:text="Pedidos"
             android:textColor="#FFF" />
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="#ce3939"
+            android:background="@color/botoes"
             android:text="Itens do Pedido"
             android:textColor="#FFF" />
 
