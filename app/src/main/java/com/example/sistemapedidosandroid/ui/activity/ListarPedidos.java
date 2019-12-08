@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.Pedido;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
+import com.example.sistemapedidosandroid.ui.activity.adapter.ListaPedidosAdapter;
 import com.example.sistemapedidosandroid.ui.activity.adapter.ListaPedidosPorClienteAdapter;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class ListarPedidos extends AppCompatActivity {
 
     Long id;
 
-    ListaPedidosPorClienteAdapter adapterPedidos;
+    ListaPedidosAdapter adapterPedidos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class ListarPedidos extends AppCompatActivity {
 
     private void criaAdapterListView(Response<List<Pedido>> response) {
         List<Pedido> pedidos = response.body();
-        adapterPedidos = new ListaPedidosPorClienteAdapter(this, pedidos);
+        adapterPedidos = new ListaPedidosAdapter(this, pedidos);
         lista_pedidos.setAdapter(adapterPedidos);
     }
 

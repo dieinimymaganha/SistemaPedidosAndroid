@@ -6,32 +6,27 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/itens_pedidos_id"
+        android:id="@+id/itens_pedidos_nome_cliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:textSize="15dp"
         tools:text="Numero Pedido 1" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+
+    <TextView
+        android:id="@+id/itens_pedido_cliente_numero_pedido"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_margin="8dp"
+        tools:text="Quantidade 4" />
 
-        <TextView
-            android:id="@+id/itens_pedidos_produto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            tools:text="Cerveja Lava" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/itens_pedido_cliente_quantidade"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="8dp"-->
-<!--            tools:text="Quantidade 4" />-->
-
-    </LinearLayout>
-
+    <TextView
+        android:id="@+id/itens_pedidos_produto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="18dp"
+        tools:text="Cerveja Lava" />
 
 </LinearLayout>

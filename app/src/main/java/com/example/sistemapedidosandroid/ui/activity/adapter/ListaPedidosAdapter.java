@@ -53,10 +53,11 @@ public class ListaPedidosAdapter extends BaseAdapter {
     }
 
     private void criaDadosAdapter(Pedido pedido, View view) {
-        TextView numeroPedido = view.findViewById(R.id.itens_pedidos_id);
-        numeroPedido.setText("Numero do pedido: " + pedido);
+        TextView nomeCliente = view.findViewById(R.id.itens_pedidos_nome_cliente);
+        nomeCliente.setText("Cliente: " + pedido.getCliente());
         TextView produto = view.findViewById(R.id.itens_pedidos_produto);
-        produto.setText(pedido.getItempedido().toString());
+        produto.setText("Produtos: " + pedido.getItempedido().toString());
+        TextView numeroPedido = view.findViewById(R.id.itens_pedido_cliente_numero_pedido);
+        numeroPedido.setText("Número do pedido: " + pedido.getId().toString());
     }
-
 }
