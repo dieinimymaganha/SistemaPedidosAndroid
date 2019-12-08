@@ -34,22 +34,9 @@ public class CadastrarCliente extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_cliente);
-
         setTitle(CADASTRAR_CLIENTE);
-
-        edNome = findViewById(R.id.nome);
-        edSobrenome = findViewById(R.id.sobrenome);
-        edCpf = findViewById(R.id.cpf);
-        btCadastrar = findViewById(R.id.cadastrar);
-        btCancelar = findViewById(R.id.cancelar);
-
-
-        // Criando mascara para cpf
-        SimpleMaskFormatter smf = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
-        MaskTextWatcher mtw = new MaskTextWatcher(edCpf, smf);
-        edCpf.addTextChangedListener(mtw);
-        // Fim mascara
-
+        inicializacaoDosCampos();
+        mascaraCpf();
 
         btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,56 +53,66 @@ public class CadastrarCliente extends AppCompatActivity {
 
                 if (nome == null || nome.equals("")) {
                     edNome.setError("Este campo é obrigatório");
-                }
-
-                else if (sobrenome == null || sobrenome.equals("")) {
-
+                }else if (sobrenome == null || sobrenome.equals("")) {
                     edSobrenome.setError(("Este campo é obrigatório"));
-                }
-                else if (cpf == null || cpf.equals("")) {
-
+                }else if (cpf == null || cpf.equals("")) {
                     edCpf.setError("Este Campo é obrigatório");
                 } else {
-                    Call call = new RetrofitInicializador().getClienteService().cadastrar(cliente);
-
-                    call.enqueue(new Callback() {
-                        @Override
-                        public void onResponse(Call call, Response response) {
-
-                            int resposta = response.code();
-
-
-                            if (resposta == 500) {
-                                edCpf.setError("CPF já cadastrado");
-                            } else {
-                                Log.i("onResponse", "Requisição com sucesso");
-                                Toast.makeText(CadastrarCliente.this, "Cliente " + cliente.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(CadastrarCliente.this, ListarCliente.class);
-                                startActivity(i);
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onFailure(Call call, Throwable t) {
-                            Log.e("onFailure", "Requisão falhou");
-                        }
-                    });
-
+                    cadastraCliente(cliente);
                 }
-
-
             }
         });
 
         btCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(CadastrarCliente.this, ListarCliente.class);
-                startActivity(i);
+                finish();
             }
         });
+    }
+
+    private void inicializacaoDosCampos() {
+        edNome = findViewById(R.id.nome);
+        edSobrenome = findViewById(R.id.sobrenome);
+        edCpf = findViewById(R.id.cpf);
+        btCadastrar = findViewById(R.id.cadastrar);
+        btCancelar = findViewById(R.id.cancelar);
+    }
+
+    private void cadastraCliente(Cliente cliente) {
+        Call call = new RetrofitInicializador().getClienteService().cadastrar(cliente);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                validaCpf(response, cliente);
+            }
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.e("onFailure", "Requisão falhou");
+            }
+        });
+    }
+
+    private void validaCpf(Response response, Cliente cliente) {
+        int resposta = response.code();
+
+        if (resposta == 500) {
+            edCpf.setError("CPF já cadastrado");
+        } else {
+            Log.i("onResponse", "Requisição com sucesso");
+            Toast.makeText(CadastrarCliente.this, "Cliente " + cliente.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(CadastrarCliente.this, ListarCliente.class);
+            startActivity(i);
+        }
+    }
+
+    private void mascaraCpf() {
+        // Criando mascara para cpf
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
+        MaskTextWatcher mtw = new MaskTextWatcher(edCpf, smf);
+        edCpf.addTextChangedListener(mtw);
+        // Fim mascara
     }
 
     //Cria o menu para enviar para o home
