@@ -59,7 +59,6 @@ public class CadastrarCliente extends AppCompatActivity {
                 String sobrenome = edSobrenome.getText().toString();
                 String cpf = edCpf.getText().toString();
 
-
                 Cliente cliente = new Cliente();
                 cliente.setNome(nome);
                 cliente.setSobrenome(sobrenome);
@@ -69,11 +68,11 @@ public class CadastrarCliente extends AppCompatActivity {
                     edNome.setError("Este campo é obrigatório");
                 }
 
-                if (sobrenome == null || sobrenome.equals("")) {
+                else if (sobrenome == null || sobrenome.equals("")) {
 
                     edSobrenome.setError(("Este campo é obrigatório"));
                 }
-                if (cpf == null || cpf.equals("")) {
+                else if (cpf == null || cpf.equals("")) {
 
                     edCpf.setError("Este Campo é obrigatório");
                 } else {

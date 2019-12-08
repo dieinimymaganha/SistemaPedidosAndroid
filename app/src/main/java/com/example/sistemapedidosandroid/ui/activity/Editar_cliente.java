@@ -25,42 +25,27 @@ import retrofit2.Response;
 
 public class Editar_cliente extends AppCompatActivity {
 
+    public static final String EDIDAR_CLIENTE = "Edidar Cliente";
     EditText edId, edNome, edSobrenome, edCpf;
     Button btAtualizar, btCancelar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_cliente);
 
-        edId = findViewById(R.id.idCliente);
-        edNome = findViewById(R.id.nome);
-        edSobrenome = findViewById(R.id.sobrenome);
-        edCpf = findViewById(R.id.cpf);
-
-        btAtualizar = findViewById(R.id.alterar);
-        btCancelar = findViewById(R.id.cancelar);
+        setTitle(EDIDAR_CLIENTE);
+        inicializacaoDosCampos();
 
         Intent i = getIntent();
-
 
         Long id = i.getLongExtra("id", 0);
         String id2 = id.toString();
         String nome = i.getStringExtra("nome").toString();
         String sobrenome = i.getStringExtra("sobrenome").toString();
         String cpf = i.getStringExtra("cpf").toString();
+        mascaraCpf();
 
-        // Criando mascara para cpf
-        SimpleMaskFormatter smf = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
-        MaskTextWatcher mtw = new MaskTextWatcher(edCpf, smf);
-        edCpf.addTextChangedListener(mtw);
-        // Fim mascara
-
-        edId.setText(id2);
-        edId.setEnabled(false);
-        edNome.setText(nome);
-        edSobrenome.setText(sobrenome);
-        edCpf.setText(cpf);
+        setaCampos(id2, nome, sobrenome, cpf);
 
         btAtualizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,42 +63,61 @@ public class Editar_cliente extends AppCompatActivity {
 
                 if (nome == null || nome.equals("")) {
                     edNome.setError("Este campo é obrigatório");
-                }
-
-                if (sobrenome == null || sobrenome.equals("")) {
-
+                }else if (sobrenome == null || sobrenome.equals("")) {
                     edSobrenome.setError(("Este campo é obrigatório"));
-                }
-                if (cpf == null || cpf.equals("")) {
-
+                }else if  (cpf == null || cpf.equals("")) {
                     edCpf.setError("Este Campo é obrigatório");
-                } else {
+                }else{
                     Call call = new RetrofitInicializador().getClienteService().alterar(id, cliente);
-
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
                             int resposta = response.code();
                             Log.i("onResponse", "Requisição com sucesso");
-                            Toast.makeText(Editar_cliente.this, "Cliente " + cliente.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Editar_cliente.this, "Cliente " + cliente.getNome() + " alterado!", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(Editar_cliente.this, ListarCliente.class);
                             startActivity(i);
-
                         }
-
                         @Override
                         public void onFailure(Call call, Throwable t) {
-
                         }
                     });
-
                 }
-
-
             }
         });
 
+        btCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
+    private void setaCampos(String id2, String nome, String sobrenome, String cpf) {
+        edId.setText(id2);
+        edId.setEnabled(false);
+        edNome.setText(nome);
+        edSobrenome.setText(sobrenome);
+        edCpf.setText(cpf);
+    }
+
+    private void mascaraCpf() {
+        // Criando mascara para cpf
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
+        MaskTextWatcher mtw = new MaskTextWatcher(edCpf, smf);
+        edCpf.addTextChangedListener(mtw);
+        // Fim mascara
+    }
+
+    private void inicializacaoDosCampos() {
+        setContentView(R.layout.activity_editar_cliente);
+        edId = findViewById(R.id.idCliente);
+        edNome = findViewById(R.id.nome);
+        edSobrenome = findViewById(R.id.sobrenome);
+        edCpf = findViewById(R.id.cpf);
+        btAtualizar = findViewById(R.id.alterar);
+        btCancelar = findViewById(R.id.cancelar);
     }
 
     //Cria o menu para enviar para o home
@@ -128,9 +132,7 @@ public class Editar_cliente extends AppCompatActivity {
         if (itemId == R.id.menu_home_home) {
             startActivity(new Intent(this, Inicio.class));
         }
-
         return super.onOptionsItemSelected(item);
     }
-
     // fim do menu home
 }
