@@ -48,12 +48,16 @@ public class ListaPedidosPorClienteAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.itens_pedidos_por_cliente, parent, false);
 
         }
+        criaDadosAdapter(pedido, view);
+
+        return view;
+    }
+
+    private void criaDadosAdapter(Pedido pedido, View view) {
         TextView numeroPedido = view.findViewById(R.id.itens_pedido_cliente_id);
         numeroPedido.setText("Numero do pedido: " + pedido.getId());
         TextView produto = view.findViewById(R.id.itens_pedido_cliente_produto);
         produto.setText(pedido.getItempedido().toString());
-
-        return view;
     }
 
 }
