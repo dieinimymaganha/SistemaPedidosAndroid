@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/menu_cliente_listar_pedidos"
+        android:title="Listar Pedidos" />
     <item
         android:id="@+id/alterar"
         android:title="Alterar" />
     <item
         android:id="@+id/excluir"
         android:title="Remover" />
-
 </menu>

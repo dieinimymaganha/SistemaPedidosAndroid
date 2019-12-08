@@ -2,7 +2,7 @@ package com.example.sistemapedidosandroid.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -12,7 +12,7 @@ import android.widget.SearchView;
 import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.Pedido;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
-import com.example.sistemapedidosandroid.ui.activity.adapter.ListaPedidosClienteAdapter;
+import com.example.sistemapedidosandroid.ui.activity.adapter.ListaPedidosPorClienteAdapter;
 
 import java.util.List;
 
@@ -20,25 +20,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.sistemapedidosandroid.R.layout.itens_pedido_cliente;
-import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_dropdown_item;
-
-public class ListarPedidos extends AppCompatActivity {
+public class ListarPedidosPorCliente extends AppCompatActivity {
 
     public static final String PEDIDOS = "Pedidos";
     SearchView searchView;
     ListView lista_pedidos;
     ArrayAdapter arrayAdapter;
 
-    ListaPedidosClienteAdapter adapterPedidos;
+    Long id;
+
+    ListaPedidosPorClienteAdapter adapterPedidos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_pedidos);
+        setContentView(R.layout.activity_listar_pedidos_por_cliente);
         setTitle(PEDIDOS);
         inicializacaoDosCampos();
 //        configuraFabNovoPedido();
+
+        Intent i = getIntent();
+        id = i.getLongExtra("id", 0);
+
     }
 
     @Override
@@ -48,7 +51,9 @@ public class ListarPedidos extends AppCompatActivity {
     }
 
     private void carregaDadosPedidos() {
-        Call<List<Pedido>> call = new RetrofitInicializador().getPedidoService().lista();
+
+
+        Call<List<Pedido>> call = new RetrofitInicializador().getPedidoService().listarPedidosCliente(id);
 
         call.enqueue(new Callback<List<Pedido>>() {
             @Override
@@ -72,7 +77,7 @@ public class ListarPedidos extends AppCompatActivity {
 
     private void criaAdapterListView(Response<List<Pedido>> response) {
         List<Pedido> pedidos = response.body();
-        adapterPedidos = new ListaPedidosClienteAdapter(this, pedidos);
+        adapterPedidos = new ListaPedidosPorClienteAdapter(this, pedidos);
         lista_pedidos.setAdapter(adapterPedidos);
     }
 

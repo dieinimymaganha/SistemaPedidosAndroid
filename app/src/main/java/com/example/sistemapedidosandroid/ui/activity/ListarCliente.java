@@ -143,7 +143,20 @@ public class ListarCliente extends AppCompatActivity {
         if (itemId == R.id.alterar) {
             alterarCliente(item);
         }
+
+        if (itemId == R.id.menu_cliente_listar_pedidos){
+            listaPedidosCliente(item);
+        }
+
         return super.onContextItemSelected(item);
+    }
+
+    private void listaPedidosCliente(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Cliente clienteEscolhido = (Cliente) arrayAdapter.getItem(menuInfo.position);
+        Intent i = new Intent(getApplicationContext(), ListarPedidosPorCliente.class);
+        i.putExtra("id", clienteEscolhido.getId());
+        startActivity(i);
     }
 
     private void alterarCliente(@NonNull MenuItem item) {
