@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,68 +32,56 @@ import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_
 public class CadastrarPedido extends AppCompatActivity {
 
     TextView txtNome, txtCpf, txtQuantidade;
-    Long id;
     Spinner spinner_produtos;
-
-    Long id_produto;
-
-    Button btCadastrar;
-
+    Button btCadastrar, btCancelar;
     ArrayAdapter arrayAdapterProduto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar_pedido);
-        spinner_produtos = findViewById(R.id.spinner_pedido);
 
-        txtQuantidade = findViewById(R.id.activity_cadastrar_pedido_quantidade);
+
         inicializacaoDosCampos();
 
         Intent i = getIntent();
-        id = i.getLongExtra("id", 0);
         String nome = i.getStringExtra("nome").toString();
         String sobrenome = i.getStringExtra("sobrenome").toString();
         String cpf = i.getStringExtra("cpf").toString();
+
         txtCpf.setText(cpf);
         txtNome.setText(nome + " " + sobrenome);
 
-
         carregaProdutos();
-
 
         btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-
                 int quantidade = Integer.parseInt(txtQuantidade.getText().toString());
-
                 PedidoCad pedidoCad = new PedidoCad();
-
                 pedidoCad.setCpf(cpf);
                 pedidoCad.setDescricaoProduto(spinner_produtos.getSelectedItem().toString());
                 pedidoCad.setQuantidade(quantidade);
-
                 Call<Void> call = new RetrofitInicializador().getPedidoCadService().cadastrar(pedidoCad);
-
                 call.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Log.i(">>>> ", "cadastrou");
+                        Toast.makeText(CadastrarPedido.this, "Pedido cadastrado", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
-
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
 
                     }
                 });
+            }
+        });
 
-
-                Toast.makeText(CadastrarPedido.this, " Escolha " + spinner_produtos.getSelectedItem(), Toast.LENGTH_SHORT).show();
-
-
+        btCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -115,15 +104,37 @@ public class CadastrarPedido extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Produto>> call, Throwable t) {
 
+
             }
         });
     }
 
     private void inicializacaoDosCampos() {
+        setContentView(R.layout.activity_cadastrar_pedido);
+        spinner_produtos = findViewById(R.id.spinner_pedido);
         btCadastrar = findViewById(R.id.acttivity_cadastrar_pedido_cadastrar);
+        btCancelar = findViewById(R.id.activity_cadastrar_pedido_cancelar);
         txtCpf = findViewById(R.id.activity_cadastrar_pedido_cpf);
         txtNome = findViewById(R.id.activity_cadastrar_pedido_nome);
+        txtQuantidade = findViewById(R.id.activity_cadastrar_pedido_quantidade);
+
     }
+    //Cria o menu para enviar para o home
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_home_home) {
+            startActivity(new Intent(this, Inicio.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    // fim do menu home
+
 
 
 }

@@ -19,7 +19,8 @@
             android:id="@+id/activity_cadastrar_pedido_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Dieinmy Maganha" />
+            tools:text="Dieinmy Maganha"
+            android:textSize="25dp"/>
 
 
         <TextView
@@ -49,30 +50,26 @@
             android:layout_height="wrap_content"
             android:hint="Quantidade"
             android:inputType="number" />
-
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
         <Button
             android:id="@+id/acttivity_cadastrar_pedido_cadastrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/colorAccent"
+            android:background="@color/botoes"
             android:text="Cadastrar"
             android:textColor="#fff" />
-
         <Button
-            android:id="@+id/cancelar"
+            android:id="@+id/activity_cadastrar_pedido_cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/colorAccent"
+            android:background="@color/botoes"
             android:text="Cancelar"
             android:textColor="#fff" />
 
