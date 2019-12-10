@@ -28,9 +28,18 @@ public class Pedido {
 	@ManyToOne
 	private Cliente cliente;
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<ItemPedido> itempedido;
+
+	public Pedido() {
+
+	}
+
+	public Pedido(Cliente cliente, List<ItemPedido> itempedido) {
+		this.cliente = cliente;
+		this.itempedido = itempedido;
+	}
 
 	public Long getId() {
 		return id;

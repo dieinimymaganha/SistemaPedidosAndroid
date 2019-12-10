@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import backend.backend.controller.form.PedidoForm;
 import backend.backend.controller.notfound.PedidoNotFoundException;
 import backend.backend.model.Pedido;
+import backend.backend.repository.ClienteRepository;
 import backend.backend.repository.PedidoRepository;
+import backend.backend.repository.ProdutoRepository;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -22,6 +26,12 @@ public class PedidoController {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private ProdutoRepository produtoRepository;
 
 
 	@GetMapping
@@ -41,11 +51,23 @@ public class PedidoController {
 	
 	
 
+//	@PostMapping
+//	@RequestMapping(value = "", method = RequestMethod.POST)
+//	ResponseEntity<Pedido> newPedido(@RequestBody Pedido pedido) {
+//		Pedido p = pedidoRepository.save(pedido);
+//		return new ResponseEntity<Pedido>(p, HttpStatus.OK);
+//	}
+//	
+	
 	@PostMapping
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	ResponseEntity<Pedido> newPedido(@RequestBody Pedido pedido) {
-		Pedido p = pedidoRepository.save(pedido);
-		return new ResponseEntity<Pedido>(p, HttpStatus.OK);
+	ResponseEntity<Pedido> newPedido(@RequestBody PedidoForm form){
+		Pedido pedido = form.converter(clienteRepository, produtoRepository);
+		pedidoRepository.save(pedido);
+		
+		return new ResponseEntity<Pedido>(pedido, HttpStatus.OK);
 	}
+	
+	
+	
 
 }
