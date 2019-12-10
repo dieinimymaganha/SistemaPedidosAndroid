@@ -49,22 +49,18 @@ public class PedidoController {
 		return pedidoRepository.findByCliente_Id(cliente_id);
 	}
 	
-	
 
-//	@PostMapping
-//	@RequestMapping(value = "", method = RequestMethod.POST)
-//	ResponseEntity<Pedido> newPedido(@RequestBody Pedido pedido) {
-//		Pedido p = pedidoRepository.save(pedido);
-//		return new ResponseEntity<Pedido>(p, HttpStatus.OK);
-//	}
-//	
 	
 	@PostMapping
 	ResponseEntity<Pedido> newPedido(@RequestBody PedidoForm form){
 		Pedido pedido = form.converter(clienteRepository, produtoRepository);
-		pedidoRepository.save(pedido);
-		
-		return new ResponseEntity<Pedido>(pedido, HttpStatus.OK);
+		if(pedido.getCliente() == null) {
+			return new ResponseEntity<Pedido>(pedido, HttpStatus.NO_CONTENT);	
+		}else {
+			pedidoRepository.save(pedido);
+			return new ResponseEntity<Pedido>(pedido, HttpStatus.OK);			
+		}
+
 	}
 	
 	

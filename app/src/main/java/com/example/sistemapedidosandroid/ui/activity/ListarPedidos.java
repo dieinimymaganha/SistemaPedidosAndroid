@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -17,6 +18,7 @@ import com.example.sistemapedidosandroid.modelo.Pedido;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
 import com.example.sistemapedidosandroid.ui.activity.adapter.ListaPedidosAdapter;
 import com.example.sistemapedidosandroid.ui.activity.adapter.ListaPedidosPorClienteAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -27,20 +29,21 @@ import retrofit2.Response;
 public class ListarPedidos extends AppCompatActivity {
 
     public static final String PEDIDOS = "Pedidos";
-    SearchView searchView;
     ListView lista_pedidos;
-    ArrayAdapter arrayAdapter;
-
     Long id;
-
     ListaPedidosAdapter adapterPedidos;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_pedidos_por_cliente);
+        setContentView(R.layout.activity_listar_pedidos);
         setTitle(PEDIDOS);
         inicializacaoDosCampos();
+        configuraFabNovoPedido();
     }
 
     @Override
@@ -73,6 +76,20 @@ public class ListarPedidos extends AppCompatActivity {
 
     private void inicializacaoDosCampos() {
         lista_pedidos = findViewById(R.id.activity_lista_pedidos);
+    }
+
+    public void configuraFabNovoPedido(){
+        FloatingActionButton botaoNovoPedido = findViewById(R.id.activity_lista_pedido_fab_novo_pedido);
+        botaoNovoPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abreCadastroPedido();
+            }
+        });
+    }
+
+    public void abreCadastroPedido(){
+        startActivity(new Intent(this, CadastrarPedido.class));
     }
 
 

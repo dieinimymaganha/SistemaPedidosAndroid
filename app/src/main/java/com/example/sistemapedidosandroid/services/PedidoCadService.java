@@ -12,5 +12,4 @@ public interface PedidoCadService {
     @POST("pedidos/")
     Call<Void> cadastrar(@Body PedidoCad pedidoCad);
 
-
 }

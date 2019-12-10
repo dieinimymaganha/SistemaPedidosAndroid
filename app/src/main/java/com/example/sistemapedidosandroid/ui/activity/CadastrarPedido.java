@@ -1,24 +1,22 @@
 package com.example.sistemapedidosandroid.ui.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sistemapedidosandroid.R;
 import com.example.sistemapedidosandroid.modelo.PedidoCad;
 import com.example.sistemapedidosandroid.modelo.Produto;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import java.util.List;
 
@@ -28,61 +26,79 @@ import retrofit2.Response;
 
 import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_dropdown_item;
 
-public class CadastrarPedidoCliente extends AppCompatActivity {
+public class CadastrarPedido extends AppCompatActivity {
 
-    TextView txtNome, txtCpf, txtQuantidade;
+    EditText edCpf, edQuantidade;
+    Button btCadatrar, btCancelar;
     Spinner spinner_produtos;
-    Button btCadastrar, btCancelar;
+
     ArrayAdapter arrayAdapterProduto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        inicializacaoDosCampos();
+        setContentView(R.layout.activity_cadastrar_pedido);
+        spinner_produtos = findViewById(R.id.activity_cad_pedido_spinner_produto);
+        edCpf = findViewById(R.id.activity_cad_pedido_cpf);
+        edQuantidade = findViewById(R.id.activity_cad_pedido_quantidade);
+        btCadatrar = findViewById(R.id.activity_cad_pedido_pedido_cadastrar);
+        btCancelar = findViewById(R.id.activity_cad_pedido_pedido_cancelar);
 
-        Intent i = getIntent();
-        String nome = i.getStringExtra("nome").toString();
-        String sobrenome = i.getStringExtra("sobrenome").toString();
-        String cpf = i.getStringExtra("cpf").toString();
 
-        txtCpf.setText(cpf);
-        txtNome.setText(nome + " " + sobrenome);
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
+        MaskTextWatcher mtw = new MaskTextWatcher(edCpf, smf);
+        edCpf.addTextChangedListener(mtw);
 
         carregaProdutos();
 
-        btCadastrar.setOnClickListener(new View.OnClickListener() {
+        btCadatrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PedidoCad pedidoCad = new PedidoCad();
 
-                String qtd = txtQuantidade.getText().toString();
+                String qtd = edQuantidade.getText().toString();
+                String cpf = edCpf.getText().toString();
 
-                if (qtd == null || qtd.equals("")) {
-                    txtQuantidade.setError("Este campo é obrigatório");
+                if (cpf == null || cpf.equals("")) {
+                    edCpf.setError("Este campo é obrigatório");
+                } else if (qtd == null || qtd.equals("")) {
+                    edQuantidade.setError("Este campo é obrigatório");
+
                 } else {
                     int quantidade = Integer.parseInt(qtd);
-
-
-                    PedidoCad pedidoCad = new PedidoCad();
                     pedidoCad.setCpf(cpf);
                     pedidoCad.setDescricaoProduto(spinner_produtos.getSelectedItem().toString());
                     pedidoCad.setQuantidade(quantidade);
+
                     Call<Void> call = new RetrofitInicializador().getPedidoCadService().cadastrar(pedidoCad);
+
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.i(">>>> ", "cadastrou");
-                            Toast.makeText(CadastrarPedidoCliente.this, "Pedido cadastrado", Toast.LENGTH_SHORT).show();
-                            finish();
+                            int resposta = response.code();
+
+                            if (resposta == 204) {
+                                Toast.makeText(CadastrarPedido.this, "Cliente Não localizado", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.i(">>>>", "cadastrou ");
+                                Toast.makeText(CadastrarPedido.this, "Pedido cadastrado", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
 
+
                         }
                     });
                 }
+
+
             }
         });
 
@@ -92,6 +108,7 @@ public class CadastrarPedidoCliente extends AppCompatActivity {
                 finish();
             }
         });
+
 
     }
 
@@ -115,33 +132,5 @@ public class CadastrarPedidoCliente extends AppCompatActivity {
             }
         });
     }
-
-    private void inicializacaoDosCampos() {
-        setContentView(R.layout.activity_cadastrar_pedido_cliente);
-        spinner_produtos = findViewById(R.id.spinner_pedido);
-        btCadastrar = findViewById(R.id.acttivity_cadastrar_pedido_cadastrar);
-        btCancelar = findViewById(R.id.activity_cadastrar_pedido_cancelar);
-        txtCpf = findViewById(R.id.activity_cadastrar_pedido_cpf);
-        txtNome = findViewById(R.id.activity_cadastrar_pedido_nome);
-        txtQuantidade = findViewById(R.id.activity_cadastrar_pedido_quantidade);
-
-    }
-
-    //Cria o menu para enviar para o home
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.menu_home_home) {
-            startActivity(new Intent(this, Inicio.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    // fim do menu home
-
 
 }

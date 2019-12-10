@@ -3,66 +3,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.activity.CadastrarPedidoCliente">
+    android:layout_gravity="center"
+    tools:context=".ui.activity.CadastrarPedido">
 
+    <EditText
+        android:id="@+id/activity_cad_pedido_cpf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite o CPF"
+        android:layout_margin="8dp"
 
-        <TextView
-            android:id="@+id/activity_cadastrar_pedido_nome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Dieinmy Maganha"
-            android:layout_margin="8dp"
-            android:textSize="25dp"/>
-
-
-        <TextView
-            android:layout_margin="8dp"
-
-            android:id="@+id/activity_cadastrar_pedido_cpf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="378.630.978-78" />
-
-
-
+        android:inputType="number" />
 
         <Spinner
-            android:layout_margin="8dp"
-
-            android:id="@+id/spinner_pedido"
+            android:id="@+id/activity_cad_pedido_spinner_produto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="97dp"
+            android:layout_margin="8dp"
+
             tools:tooltipText="@string/Descrição" />
 
         <EditText
-            android:layout_margin="8dp"
-
-            android:id="@+id/activity_cadastrar_pedido_quantidade"
+            android:id="@+id/activity_cad_pedido_quantidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Quantidade"
+            android:layout_margin="8dp"
+
             android:inputType="number" />
+
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center">
+
         <Button
-            android:id="@+id/acttivity_cadastrar_pedido_cadastrar"
+            android:id="@+id/activity_cad_pedido_pedido_cadastrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/botoes"
             android:text="Cadastrar"
             android:textColor="#fff" />
+
         <Button
-            android:id="@+id/activity_cadastrar_pedido_cancelar"
+            android:id="@+id/activity_cad_pedido_pedido_cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

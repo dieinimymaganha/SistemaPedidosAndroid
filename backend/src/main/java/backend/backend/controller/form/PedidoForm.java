@@ -3,6 +3,8 @@ package backend.backend.controller.form;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+
 import backend.backend.model.Cliente;
 import backend.backend.model.ItemPedido;
 import backend.backend.model.Pedido;
@@ -61,6 +63,8 @@ public class PedidoForm {
 		listaitens.add(itens);
 
 		Cliente cliente = clienteRepository.findByCpf(cpf);
+	
+		
 		return new Pedido(cliente, listaitens);
 	}
 }
