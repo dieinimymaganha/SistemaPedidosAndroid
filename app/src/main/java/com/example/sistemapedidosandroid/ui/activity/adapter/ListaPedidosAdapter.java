@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.sistemapedidosandroid.R;
+import com.example.sistemapedidosandroid.modelo.ItemPedido;
 import com.example.sistemapedidosandroid.modelo.Pedido;
 
 import java.util.List;
@@ -42,21 +43,24 @@ public class ListaPedidosAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Pedido pedido = pedidos.get(position);
         LayoutInflater inflater = LayoutInflater.from(context);
-
         View view = convertView;
         if (view == null) {
             view = inflater.inflate(R.layout.itens_pedidos, parent, false);
-
         }
         criaDadosAdapter(pedido, view);
         return view;
     }
 
     private void criaDadosAdapter(Pedido pedido, View view) {
+        List<ItemPedido> itens = pedido.getItempedido();
+        TextView produto = view.findViewById(R.id.itens_pedidos_produto);
+        TextView quantidade = view.findViewById(R.id.itens_pedidos_quantidade);
+        for (ItemPedido item : itens) {
+            produto.setText("Produto: " + item.getProduto().toString());
+            quantidade.setText("Quantidade: " + item.getQuantidade());
+        }
         TextView nomeCliente = view.findViewById(R.id.itens_pedidos_nome_cliente);
         nomeCliente.setText("Cliente: " + pedido.getCliente());
-        TextView produto = view.findViewById(R.id.itens_pedidos_produto);
-        produto.setText("Produtos: " + pedido.getItempedido().toString());
         TextView numeroPedido = view.findViewById(R.id.itens_pedido_cliente_numero_pedido);
         numeroPedido.setText("Número do pedido: " + pedido.getId().toString());
     }
