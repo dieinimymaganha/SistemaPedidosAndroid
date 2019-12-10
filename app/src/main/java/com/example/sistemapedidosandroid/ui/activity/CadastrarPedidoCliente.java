@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -29,7 +28,7 @@ import retrofit2.Response;
 
 import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_dropdown_item;
 
-public class CadastrarPedido extends AppCompatActivity {
+public class CadastrarPedidoCliente extends AppCompatActivity {
 
     TextView txtNome, txtCpf, txtQuantidade;
     Spinner spinner_produtos;
@@ -67,7 +66,7 @@ public class CadastrarPedido extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Log.i(">>>> ", "cadastrou");
-                        Toast.makeText(CadastrarPedido.this, "Pedido cadastrado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CadastrarPedidoCliente.this, "Pedido cadastrado", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                     @Override
@@ -110,7 +109,7 @@ public class CadastrarPedido extends AppCompatActivity {
     }
 
     private void inicializacaoDosCampos() {
-        setContentView(R.layout.activity_cadastrar_pedido);
+        setContentView(R.layout.activity_cadastrar_pedido_cliente);
         spinner_produtos = findViewById(R.id.spinner_pedido);
         btCadastrar = findViewById(R.id.acttivity_cadastrar_pedido_cadastrar);
         btCancelar = findViewById(R.id.activity_cadastrar_pedido_cancelar);

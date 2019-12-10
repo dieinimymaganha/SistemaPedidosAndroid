@@ -158,7 +158,7 @@ public class ListarCliente extends AppCompatActivity {
     private void incluirPedido(MenuItem item) {
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Cliente clienteEscolhido = (Cliente) arrayAdapter.getItem(menuInfo.position);
-        Intent i = new Intent(getApplicationContext(), CadastrarPedido.class);
+        Intent i = new Intent(getApplicationContext(), CadastrarPedidoCliente.class);
         i.putExtra("id", clienteEscolhido.getId());
         i.putExtra("nome", clienteEscolhido.getNome());
         i.putExtra("sobrenome", clienteEscolhido.getSobrenome());
