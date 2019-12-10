@@ -50,6 +50,6 @@ public class Cliente implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return nome + " " + sobrenome;
+        return nome + " " + sobrenome + " CPF: " + cpf;
     }
 }

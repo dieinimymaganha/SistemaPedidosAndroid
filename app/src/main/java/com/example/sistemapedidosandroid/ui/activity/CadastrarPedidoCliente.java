@@ -30,6 +30,7 @@ import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_
 
 public class CadastrarPedidoCliente extends AppCompatActivity {
 
+    public static final String CADASTRA_PEDIDO_CLIENTE = "Cadastra Pedido Cliente";
     TextView txtNome, txtCpf, txtQuantidade;
     Spinner spinner_produtos;
     Button btCadastrar, btCancelar;
@@ -38,6 +39,9 @@ public class CadastrarPedidoCliente extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        setTitle(CADASTRA_PEDIDO_CLIENTE);
 
 
         inicializacaoDosCampos();
