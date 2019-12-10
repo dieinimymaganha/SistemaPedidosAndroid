@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sistemapedidosandroid.R;
+import com.example.sistemapedidosandroid.modelo.PedidoCad;
 import com.example.sistemapedidosandroid.modelo.Produto;
 import com.example.sistemapedidosandroid.retrofit.RetrofitInicializador;
 
@@ -29,7 +30,7 @@ import static com.example.sistemapedidosandroid.R.layout.support_simple_spinner_
 
 public class CadastrarPedido extends AppCompatActivity {
 
-    TextView txtNome, txtCpf;
+    TextView txtNome, txtCpf, txtQuantidade;
     Long id;
     Spinner spinner_produtos;
 
@@ -44,6 +45,8 @@ public class CadastrarPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_pedido);
         spinner_produtos = findViewById(R.id.spinner_pedido);
+
+        txtQuantidade = findViewById(R.id.activity_cadastrar_pedido_quantidade);
         inicializacaoDosCampos();
 
         Intent i = getIntent();
@@ -54,6 +57,7 @@ public class CadastrarPedido extends AppCompatActivity {
         txtCpf.setText(cpf);
         txtNome.setText(nome + " " + sobrenome);
 
+
         carregaProdutos();
 
 
@@ -61,25 +65,32 @@ public class CadastrarPedido extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(CadastrarPedido.this, " Escolha " + spinner_produtos.getSelectedItem(), Toast.LENGTH_SHORT).show();
 
-//                AdapterView.OnItemSelectedListener escolha = new AdapterView.OnItemSelectedListener() {
-//                    @Override
-//                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//                        Long ssss = spinner_produtos.getSelectedItemId();
-//
-//                        Toast.makeText(getBaseContext(), "o item " + ssss, Toast.LENGTH_SHORT).show();
-//
-//                    }
-//
-//                    @Override
-//                    public void onNothingSelected(AdapterView<?> parent) {
-//
-//                    }
-//                };
-//
-//                spinner_produtos.setOnItemSelectedListener(escolha);
+
+                int quantidade = Integer.parseInt(txtQuantidade.getText().toString());
+
+                PedidoCad pedidoCad = new PedidoCad();
+
+                pedidoCad.setCpf(cpf);
+                pedidoCad.setDescricaoProduto(spinner_produtos.getSelectedItem().toString());
+                pedidoCad.setQuantidade(quantidade);
+
+                Call<Void> call = new RetrofitInicializador().getPedidoCadService().cadastrar(pedidoCad);
+
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Log.i(">>>> ", "cadastrou");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
+
+
+                Toast.makeText(CadastrarPedido.this, " Escolha " + spinner_produtos.getSelectedItem(), Toast.LENGTH_SHORT).show();
 
 
             }

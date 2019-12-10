@@ -44,6 +44,7 @@
             tools:tooltipText="@string/Descrição" />
 
         <EditText
+            android:id="@+id/activity_cadastrar_pedido_quantidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Quantidade"

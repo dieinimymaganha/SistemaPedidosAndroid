@@ -1,6 +1,7 @@
 package com.example.sistemapedidosandroid.retrofit;
 
 import com.example.sistemapedidosandroid.services.ClienteService;
+import com.example.sistemapedidosandroid.services.PedidoCadService;
 import com.example.sistemapedidosandroid.services.PedidoService;
 import com.example.sistemapedidosandroid.services.ProdutoService;
 
@@ -14,7 +15,7 @@ public class RetrofitInicializador {
     private final Retrofit retrofit;
 
     public RetrofitInicializador() {
-        retrofit = new Retrofit.Builder().baseUrl("http://192.168.25.132:8080/")
+        retrofit = new Retrofit.Builder().baseUrl("http://192.168.25.133:8080/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
     }
 
@@ -28,6 +29,10 @@ public class RetrofitInicializador {
 
     public PedidoService getPedidoService() {
         return retrofit.create(PedidoService.class);
+    }
+
+    public PedidoCadService getPedidoCadService() {
+        return retrofit.create(PedidoCadService.class);
     }
 
 }
